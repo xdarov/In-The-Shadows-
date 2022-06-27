@@ -12,6 +12,8 @@ public class ObjektMove : MonoBehaviour
     private Vector3 move_y = new Vector3(0f, .1f, 0f);
     private Vector3 move_z = new Vector3(0f, 0f, .1f);
 
+    public bool debug = false; //DELETE!!
+
     void Update()
     {
         if (Input.GetMouseButton(0) && !compliteLvl)
@@ -19,6 +21,8 @@ public class ObjektMove : MonoBehaviour
             transform.Rotate(Vector3.right, Input.GetAxis("Mouse Y") * 20, Space.World);
             transform.Rotate(Vector3.down, Input.GetAxis("Mouse X") * 20, Space.World);
         }
+        if (debug) //Debug
+            return;
         if (Input.GetKeyDown("z"))
         {
             if (!compliteLvl)
