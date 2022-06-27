@@ -7,12 +7,18 @@ public class ObjektMove : MonoBehaviour
 {
     private bool compliteLvl = false;
     public Vector3 correct_position;
+    public AudioSource sound;
 
     private Vector3 move_x = new Vector3(.1f, 0f, 0f);
     private Vector3 move_y = new Vector3(0f, .1f, 0f);
     private Vector3 move_z = new Vector3(0f, 0f, .1f);
 
     public bool debug = false; //DELETE!!
+
+    void Start()
+    {
+        sound.Play();
+    }
 
     void Update()
     {

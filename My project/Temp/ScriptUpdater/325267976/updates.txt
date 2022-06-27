@@ -1,1 +1,0 @@
-Temp/ScriptUpdater/325267976/2007651992_ObjektMove.cs => Assets/Scripts/ObjektMove.cs
