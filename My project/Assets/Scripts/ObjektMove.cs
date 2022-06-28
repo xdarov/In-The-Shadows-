@@ -5,9 +5,13 @@ using System;
 
 public class ObjektMove : MonoBehaviour
 {
-    private bool compliteLvl = false;
     public Vector3 correct_position;
-    public AudioSource sound;
+    public AudioSource sound_lvl;
+    public AudioSource sound_complite;
+    public GameObject menu_complite;
+
+    private bool compliteLvl = false;
+    private bool move_menu = false;
 
     private Vector3 move_x = new Vector3(.1f, 0f, 0f);
     private Vector3 move_y = new Vector3(0f, .1f, 0f);
@@ -17,7 +21,8 @@ public class ObjektMove : MonoBehaviour
 
     void Start()
     {
-        sound.Play();
+        sound_lvl.Play();
+        menu_complite = GameObject.Find("menu_complite");
     }
 
     void Update()
@@ -36,29 +41,39 @@ public class ObjektMove : MonoBehaviour
             else
                 compliteLvl = false;
         }
-        if (!compliteLvl && Math.Abs(transform.eulerAngles[0] - correct_position[0]) < 30 && Math.Abs(transform.eulerAngles[1] - correct_position[1]) < 30 && Math.Abs(transform.eulerAngles[2] - correct_position[2]) < 30)
+        if (!compliteLvl && Math.Abs(transform.eulerAngles[0] - correct_position[0]) < 20 && Math.Abs(transform.eulerAngles[1] - correct_position[1]) < 20 && Math.Abs(transform.eulerAngles[2] - correct_position[2]) < 20)
         {
             Debug.Log("You Win!");
+            sound_lvl.Stop();
+            sound_complite.Play();
             compliteLvl = true;
+            move_menu = true;
         }
         if (compliteLvl)
         {
-            if (transform.eulerAngles[0] < correct_position[0])
+            if ((int)transform.eulerAngles[0] < (int)correct_position[0])
                 transform.eulerAngles += move_x;
-            else
+            else if ((int)transform.eulerAngles[0] > (int)correct_position[0])
                 transform.eulerAngles -= move_x;
-            if (transform.eulerAngles[1] < correct_position[1])
+            if ((int)transform.eulerAngles[1] < (int)correct_position[1])
                 transform.eulerAngles += move_y;
-            else
+            else if ((int)transform.eulerAngles[1] > (int)correct_position[1])
                 transform.eulerAngles -= move_y;
-            if (transform.eulerAngles[2] < correct_position[2])
+            if ((int)transform.eulerAngles[2] < (int)correct_position[2])
                 transform.eulerAngles += move_z;
-            else 
+            else if ((int)transform.eulerAngles[1] > (int)correct_position[1])
                 transform.eulerAngles -= move_z;
+        }
+        if (move_menu)
+        {
+            menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 4;
+            if (menu_complite.transform.GetComponent<RectTransform>().localPosition[1] < 0)
+                move_menu = false;
         }
         if (Input.GetKeyDown("i"))
         {
             Debug.Log(transform.eulerAngles + " " + correct_position);
+            Debug.Log(menu_complite.transform.GetComponent<RectTransform>().localPosition);
         }
     }
 }
