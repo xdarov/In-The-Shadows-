@@ -41,7 +41,7 @@ public class ObjektMove : MonoBehaviour
             else
                 compliteLvl = false;
         }
-        if (!compliteLvl && Math.Abs(transform.eulerAngles[0] - correct_position[0]) < 20 && Math.Abs(transform.eulerAngles[1] - correct_position[1]) < 20 && Math.Abs(transform.eulerAngles[2] - correct_position[2]) < 20)
+        if (!compliteLvl && Math.Abs(transform.eulerAngles[0] - correct_position[0]) < 25 && Math.Abs(transform.eulerAngles[1] - correct_position[1]) < 25 && Math.Abs(transform.eulerAngles[2] - correct_position[2]) < 25)
         {
             Debug.Log("You Win!");
             sound_lvl.Stop();
@@ -66,8 +66,8 @@ public class ObjektMove : MonoBehaviour
         }
         if (move_menu)
         {
-            menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 4;
-            if (menu_complite.transform.GetComponent<RectTransform>().localPosition[1] < 0)
+            menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 6;
+            if (menu_complite.transform.GetComponent<RectTransform>().localPosition[1] <= 0)
                 move_menu = false;
         }
         if (Input.GetKeyDown("i"))
