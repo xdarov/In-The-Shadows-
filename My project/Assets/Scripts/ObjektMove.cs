@@ -98,7 +98,7 @@ public class ObjektMove : MonoBehaviour
         }
         if (Input.GetKeyDown("i"))
         {
-            Debug.Log(transform.eulerAngles + " " + correct_position);
+            Debug.Log("main" + transform.eulerAngles + " " + correct_position);
         }
     }
 
