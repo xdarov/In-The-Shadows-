@@ -8,8 +8,8 @@ public class ObjektMove : MonoBehaviour
     public Vector3 correct_position;
     public AudioSource sound_lvl;
     public AudioSource sound_complite;
-    public GameObject menu_complite;
 
+    private GameObject menu_complite;
     private bool compliteLvl = false;
     private bool move_menu = false;
 
