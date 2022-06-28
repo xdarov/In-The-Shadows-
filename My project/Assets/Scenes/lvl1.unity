@@ -678,8 +678,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   correct_position: {x: 79, y: 83, z: 180}
+  ready: 0
   sound_lvl: {fileID: 1528302973}
   sound_complite: {fileID: 1528302977}
+  accur: 25
   debug: 0
 --- !u!82 &1528302973
 AudioSource:
@@ -873,6 +875,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1528302981
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528302970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.8366003, y: 6.6232, z: 3.7145}
+  m_Center: {x: 0.34239995, y: 0.10640001, z: -0.0009518862}
 --- !u!1 &1535858629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1016,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1658640232}
+  - {fileID: 5898113311410708112}
   m_Father: {fileID: 963194228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1071,11 +1086,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!224 &1658640232 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5898113311911676391, guid: b7ad77f4923a44b29af646f4353c91d8, type: 3}
-  m_PrefabInstance: {fileID: 5898113311410708111}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1746982617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,5 +1372,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: menu_complite
       objectReference: {fileID: 0}
+    - target: {fileID: 8681325960624775443, guid: b7ad77f4923a44b29af646f4353c91d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681325961579234870, guid: b7ad77f4923a44b29af646f4353c91d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ad77f4923a44b29af646f4353c91d8, type: 3}
+--- !u!224 &5898113311410708112 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8681325961009820314, guid: b7ad77f4923a44b29af646f4353c91d8, type: 3}
+  m_PrefabInstance: {fileID: 5898113311410708111}
+  m_PrefabAsset: {fileID: 0}
