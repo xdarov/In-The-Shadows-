@@ -67,7 +67,6 @@ public class ObjektMove : MonoBehaviour
         if (!compliteLvl && in_range((int)transform.eulerAngles[0], (int)correct_position[0]) < accur && in_range((int)transform.eulerAngles[1], (int)correct_position[1]) < accur && in_range((int)transform.eulerAngles[2], (int)correct_position[2]) < accur)
         {
             Debug.Log("You Win!");
-            sound_lvl.Stop();
             sound_complite.Play();
             // x = right_move((int)transform.eulerAngles[0], (int)correct_position[0]);
             // y = right_move((int)transform.eulerAngles[1], (int)correct_position[1]);
@@ -90,8 +89,9 @@ public class ObjektMove : MonoBehaviour
             else if ((int)transform.eulerAngles[2] != (int)correct_position[2])
                 transform.eulerAngles -= move_z;
         }
-        if (move_menu)
+        if (move_menu && ready)
         {
+            sound_lvl.Stop();
             menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 6;
             if (menu_complite.transform.GetComponent<RectTransform>().localPosition[1] <= 0)
                 move_menu = false;

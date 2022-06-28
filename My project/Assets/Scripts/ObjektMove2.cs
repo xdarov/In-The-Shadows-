@@ -7,6 +7,8 @@ public class ObjektMove2 : MonoBehaviour
 {
     public Vector3 correct_position;
     public GameObject main_body;
+    public int accur;
+    public AudioSource sound_complite;
 
     private bool compliteLvl = false;
     private bool object_moove = false;
@@ -49,31 +51,44 @@ public class ObjektMove2 : MonoBehaviour
             else
                 compliteLvl = false;
         }
-        if (!compliteLvl && Math.Abs(transform.eulerAngles[0] - correct_position[0]) < 25 && Math.Abs(transform.eulerAngles[1] - correct_position[1]) < 25 && Math.Abs(transform.eulerAngles[2] - correct_position[2]) < 25)
+        if (!compliteLvl && Math.Abs(transform.eulerAngles[0] - correct_position[0]) < accur && Math.Abs(transform.eulerAngles[1] - correct_position[1]) < accur && Math.Abs(transform.eulerAngles[2] - correct_position[2]) < accur)
         {
             Debug.Log("You Win!2");
+            sound_complite.Play();
             compliteLvl = true;
             main_body.GetComponent<ObjektMove>().ready = true;
         }
         if (compliteLvl)
         {
-            if ((int)transform.eulerAngles[0] < (int)correct_position[0])
+            if (right_move((int)transform.eulerAngles[0], (int)correct_position[0]))
                 transform.eulerAngles += move_x;
-            else if ((int)transform.eulerAngles[0] > (int)correct_position[0])
+            else if ((int)transform.eulerAngles[0] != (int)correct_position[0])
                 transform.eulerAngles -= move_x;
-            if ((int)transform.eulerAngles[1] < (int)correct_position[1])
+            if (right_move((int)transform.eulerAngles[1], (int)correct_position[1]))
                 transform.eulerAngles += move_y;
-            else if ((int)transform.eulerAngles[1] > (int)correct_position[1])
+            else if ((int)transform.eulerAngles[1] != (int)correct_position[1])
                 transform.eulerAngles -= move_y;
-            if ((int)transform.eulerAngles[2] < (int)correct_position[2])
+            if (right_move((int)transform.eulerAngles[2], (int)correct_position[2]))
                 transform.eulerAngles += move_z;
-            else if ((int)transform.eulerAngles[2] > (int)correct_position[2])
+            else if ((int)transform.eulerAngles[2] != (int)correct_position[2])
                 transform.eulerAngles -= move_z;
         }
         if (Input.GetKeyDown("i"))
         {
             Debug.Log(transform.eulerAngles + " " + correct_position);
         }
-        
+    }
+
+    bool right_move(int a, int b)
+    {
+        if ((a < b && b - a <= accur) || (a > b && a - b > accur))
+            return true;
+        else 
+            return false;
+    }
+
+    int in_range(int a, int b)
+    {
+        return Math.Min(Math.Abs(a - b), Math.Abs(Math.Abs(a - b) - 360));
     }
 }
