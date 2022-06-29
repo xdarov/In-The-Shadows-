@@ -30,6 +30,7 @@ public class ObjektMove : MonoBehaviour
     {
         sound_lvl.Play();
         menu_complite = GameObject.Find("menu_complite");
+        menu_complite.SetActive(false);
     }
 
     void Update()
@@ -91,8 +92,9 @@ public class ObjektMove : MonoBehaviour
         }
         if (move_menu && ready)
         {
+            menu_complite.SetActive(true);
             sound_lvl.Stop();
-            menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 6;
+            menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 30;
             if (menu_complite.transform.GetComponent<RectTransform>().localPosition[1] <= 0)
                 move_menu = false;
         }

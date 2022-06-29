@@ -1409,6 +1409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: menu_complite
       objectReference: {fileID: 0}
+    - target: {fileID: 8681325961009820309, guid: b7ad77f4923a44b29af646f4353c91d8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8681325961009820314, guid: b7ad77f4923a44b29af646f4353c91d8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
