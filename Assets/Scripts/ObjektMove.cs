@@ -11,6 +11,7 @@ public class ObjektMove : MonoBehaviour
     public AudioSource sound_complite;
     public int accur;
 
+    private bool pause = true;
     private GameObject menu_complite;
     private GameObject next;
     private GameObject menu_pause;
@@ -22,10 +23,6 @@ public class ObjektMove : MonoBehaviour
     private Vector3 move_y = new Vector3(0f, .1f, 0f);
     private Vector3 move_z = new Vector3(0f, 0f, .1f);
 
-    // private bool x;
-    // private bool y;
-    // private bool z;
-
     public bool debug = false; //DELETE!!
 
     void Start()
@@ -34,13 +31,23 @@ public class ObjektMove : MonoBehaviour
         menu_complite = GameObject.Find("menu_complite");
         next = GameObject.Find("Next");
         menu_complite.SetActive(false);
-        next.SetActive(false);
+        if (next)
+            next.SetActive(false);
         menu_pause = GameObject.Find("menu_pause");
         menu_pause.SetActive(false);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape) && pause)
+        {
+            if (menu_pause.active)
+                menu_pause.SetActive(false);
+            else
+                menu_pause.SetActive(true);
+        }
+        if (menu_pause.active)
+            return ;
         if (Input.GetMouseButtonDown(0) || (Input.GetMouseButtonDown(1)))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -65,13 +72,6 @@ public class ObjektMove : MonoBehaviour
         {
             
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (menu_pause.active)
-                menu_pause.SetActive(false);
-            else
-                menu_pause.SetActive(true);
-        }
 
         if (debug) //Debug
             return;
@@ -86,9 +86,6 @@ public class ObjektMove : MonoBehaviour
         {
             Debug.Log("You Win!");
             sound_complite.Play();
-            // x = right_move((int)transform.eulerAngles[0], (int)correct_position[0]);
-            // y = right_move((int)transform.eulerAngles[1], (int)correct_position[1]);
-            // z = right_move((int)transform.eulerAngles[2], (int)correct_position[2]);
             compliteLvl = true;
             move_menu = true;
         }
@@ -110,8 +107,10 @@ public class ObjektMove : MonoBehaviour
         }
         if (move_menu && ready)
         {
+            pause = false;
             menu_complite.SetActive(true);
-            next.SetActive(true);
+            if (next)
+                next.SetActive(true);
             sound_lvl.Stop();
             menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 30;
             if (menu_complite.transform.GetComponent<RectTransform>().localPosition[1] <= 0)

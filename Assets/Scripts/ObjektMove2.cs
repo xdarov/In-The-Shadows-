@@ -9,6 +9,7 @@ public class ObjektMove2 : MonoBehaviour
     public GameObject main_body;
     public int accur;
     public AudioSource sound_complite;
+    public GameObject menu_pause;
 
     private bool compliteLvl = false;
     private bool object_moove = false;
@@ -21,6 +22,8 @@ public class ObjektMove2 : MonoBehaviour
 
     void Update()
     {
+        if (menu_pause.active)
+            return ;
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
