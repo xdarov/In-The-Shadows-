@@ -12,9 +12,12 @@ public class ObjektMove : MonoBehaviour
     public int accur;
 
     private GameObject menu_complite;
+    private GameObject next;
+    private GameObject menu_pause;
     private bool compliteLvl = false;
     private bool object_moove = false;
     private bool move_menu = false;
+    private bool pause = false;
 
     private Vector3 move_x = new Vector3(.1f, 0f, 0f);
     private Vector3 move_y = new Vector3(0f, .1f, 0f);
@@ -30,16 +33,19 @@ public class ObjektMove : MonoBehaviour
     {
         sound_lvl.Play();
         menu_complite = GameObject.Find("menu_complite");
+        next = GameObject.Find("Next");
         menu_complite.SetActive(false);
+        next.SetActive(false);
+        menu_pause = GameObject.Find("menu_pause");
+        menu_pause.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || (Input.GetMouseButtonDown(1)))
         {
-            RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+            RaycastHit hit;
             Physics.Raycast(ray, out hit);
             if (hit.transform == transform)
                 object_moove = true;
@@ -56,6 +62,18 @@ public class ObjektMove : MonoBehaviour
                 transform.Rotate(Vector3.down, Input.GetAxis("Mouse X") * 20, Space.World);
             }
         }
+        if (Input.GetMouseButton(1) && !compliteLvl)
+        {
+            
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (menu_pause.active)
+                menu_pause.SetActive(false);
+            else
+                menu_pause.SetActive(true);
+        }
+
         if (debug) //Debug
             return;
         if (Input.GetKeyDown("z"))
@@ -75,6 +93,7 @@ public class ObjektMove : MonoBehaviour
             compliteLvl = true;
             move_menu = true;
         }
+        
         if (compliteLvl)
         {
             if (right_move((int)transform.eulerAngles[0], (int)correct_position[0]))
@@ -93,14 +112,19 @@ public class ObjektMove : MonoBehaviour
         if (move_menu && ready)
         {
             menu_complite.SetActive(true);
+            next.SetActive(true);
             sound_lvl.Stop();
             menu_complite.transform.GetComponent<RectTransform>().localPosition -= move_y * 30;
             if (menu_complite.transform.GetComponent<RectTransform>().localPosition[1] <= 0)
+            {
+                LoadScene.save_game();
                 move_menu = false;
+            }
         }
         if (Input.GetKeyDown("i"))
         {
             Debug.Log("main" + transform.eulerAngles + " " + correct_position);
+            Debug.Log(transform.name + " " + transform.position);
         }
     }
 
