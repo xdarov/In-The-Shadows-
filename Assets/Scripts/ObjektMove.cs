@@ -17,7 +17,6 @@ public class ObjektMove : MonoBehaviour
     private bool compliteLvl = false;
     private bool object_moove = false;
     private bool move_menu = false;
-    private bool pause = false;
 
     private Vector3 move_x = new Vector3(.1f, 0f, 0f);
     private Vector3 move_y = new Vector3(0f, .1f, 0f);
