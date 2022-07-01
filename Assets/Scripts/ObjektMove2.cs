@@ -22,7 +22,7 @@ public class ObjektMove2 : MonoBehaviour
 
     void Update()
     {
-        if (menu_pause.active)
+        if (menu_pause.activeSelf)
             return ;
         if (Input.GetMouseButtonDown(0))
         {

@@ -41,12 +41,12 @@ public class ObjektMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && pause)
         {
-            if (menu_pause.active)
+            if (menu_pause.activeSelf)
                 menu_pause.SetActive(false);
             else
                 menu_pause.SetActive(true);
         }
-        if (menu_pause.active)
+        if (menu_pause.activeSelf)
             return ;
         if (Input.GetMouseButtonDown(0) || (Input.GetMouseButtonDown(1)))
         {
